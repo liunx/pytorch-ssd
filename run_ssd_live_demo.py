@@ -19,8 +19,8 @@ if len(sys.argv) >= 5:
     cap = cv2.VideoCapture(sys.argv[4])  # capture from file
 else:
     cap = cv2.VideoCapture(0)   # capture from camera
-    cap.set(3, 1920)
-    cap.set(4, 1080)
+    #cap.set(3, 1920)
+    #cap.set(4, 1080)
 
 class_names = [name.strip() for name in open(label_path).readlines()]
 num_classes = len(class_names)
@@ -71,7 +71,7 @@ while True:
     interval = timer.end()
     print('Time: {:.2f}s, Detect Objects: {:d}.'.format(interval, labels.size(0)))
     for i in range(boxes.size(0)):
-        box = boxes[i, :]
+        box = boxes[i, :].int()
         label = f"{class_names[labels[i]]}: {probs[i]:.2f}"
         cv2.rectangle(orig_image, (box[0], box[1]), (box[2], box[3]), (255, 255, 0), 4)
 
