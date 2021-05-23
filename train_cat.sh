@@ -5,7 +5,6 @@ python3 train_ssd.py \
     --datasets data/VOC2012 \
     --validation_dataset data/VOC2012 \
     --net mb1-ssd \
-    --pretrained_ssd models/mobilenet-v1-ssd-mp-0_675.pth \
     --scheduler cosine \
     --lr 0.01 \
     --t_max 100 \
@@ -13,4 +12,4 @@ python3 train_ssd.py \
     --num_epochs 200 \
     --num_workers 8 \
     --batch_size 16 \
-    --checkpoint_folder models/voc
+    --checkpoint_folder models/cat
