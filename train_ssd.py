@@ -134,10 +134,10 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
             avg_reg_loss = running_regression_loss / debug_steps
             avg_clf_loss = running_classification_loss / debug_steps
             logging.info(
-                f"Epoch: {epoch}, Step: {i}, " +
-                f"Average Loss: {avg_loss:.4f}, " +
-                f"Average Regression Loss {avg_reg_loss:.4f}, " +
-                f"Average Classification Loss: {avg_clf_loss:.4f}"
+                f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Avg Loss: {avg_loss:.4f}, " +
+                f"Avg Regression Loss {avg_reg_loss:.4f}, " +
+                f"Avg Classification Loss: {avg_clf_loss:.4f}"
             )
             running_loss = 0.0
             running_regression_loss = 0.0
@@ -172,6 +172,13 @@ if __name__ == '__main__':
     timer = Timer()
 
     logging.info(args)
+    # make sure that the checkpoint output dir exists
+    if args.checkpoint_folder:
+        args.checkpoint_folder = os.path.expanduser(args.checkpoint_folder)
+
+        if not os.path.exists(args.checkpoint_folder):
+            os.mkdir(args.checkpoint_folder)
+            
     if args.net == 'vgg16-ssd':
         create_net = create_vgg_ssd
         config = vgg_ssd_config

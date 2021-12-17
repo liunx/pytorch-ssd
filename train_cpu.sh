@@ -1,11 +1,11 @@
 #!/bin/bash
 
-MOD=life
+DATA_SET=$1
 
 python3 train_ssd.py \
     --dataset_type open_images \
-    --datasets data/${MOD} \
-    --checkpoint_folder models/${MOD} \
+    --datasets data/${DATA_SET} \
+    --checkpoint_folder models/${DATA_SET} \
     --net mb1-ssd \
     --pretrained_ssd models/mobilenet-v1-ssd-mp-0_675.pth \
     --scheduler cosine \
