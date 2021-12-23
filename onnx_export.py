@@ -88,7 +88,10 @@ net.to(device)
 net.eval()
 
 # create example image data
-dummy_input = torch.randn(args.batch_size, 3, args.height, args.width).cuda()
+if torch.cuda.is_available():
+    dummy_input = torch.randn(args.batch_size, 3, args.height, args.width).cuda()
+else:
+    dummy_input = torch.randn(args.batch_size, 3, args.height, args.width)
 
 # format output model path
 if not args.output:
